@@ -1,8 +1,8 @@
 from Game import Game
-from RandomBot import RandomBot
+from SampleBot import SampleBot
 
 def main():
-    game:Game = Game([RandomBot(),RandomBot(),RandomBot(),RandomBot()])
+    game:Game = Game([SampleBot(),SampleBot(),SampleBot(),SampleBot()])
     game.execute()
 
 main()

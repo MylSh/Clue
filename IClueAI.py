@@ -38,7 +38,7 @@ class IClueAI:
 
    # Receives information about the suggestion that was previously made by the current player.  Expected to be called immediately after
    # a Suggestion was returned by "takeTurn()"
-    def observe(self, suggestion: Suggestion, blocker: Optional[Tuple[int, Card]]) -> None:
+    def receiveSuggestionResult(self, suggestion: Suggestion, blocker: Optional[Tuple[int, Card]]) -> None:
         pass
 
    # suggestorID is the absolute position of the player who made the suggestion.  0-based counting
@@ -46,11 +46,11 @@ class IClueAI:
    # blockerID is the absolute position of the player who has a card that blocked the suggestion.  0-based counting.
    #   If no non-suggesting player could block it, then a value of `None` will be used
    # PRECOND: 0<=blockerID<numPlayers  OR blockerID==sentinelValue
-    def observe(self, suggestorID: int, suggestion: Suggestion, blockerID: Optional[int]) -> None:
+    def observeSuggestion(self, suggestorID: int, suggestion: Suggestion, blockerID: Optional[int]) -> None:
         pass
 
    # accusorIDis the absolute position of the player who made the suggestion.  0-based counting
    # PRECOND: 0<=accusorID<numPlayers
    # This will only ever be called if the accusation is wrong.  Otherwise the game would already be over.
-    def observe(self, accusorID: int, accusation: Accusation) -> None:
+    def observeAccusation(self, accusorID: int, accusation: Accusation) -> None:
         pass
