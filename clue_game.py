@@ -78,6 +78,18 @@ class Suggestion(Scenario):
 class Accusation(Scenario):
     """An accusation"""
 
+
+class Counterevidence(NamedTuple):
+    """Information that disproves a Suggestion.
+
+    Members:
+    refuter_id: The id of the player who provided the evidence.
+    evidence: the card that disproves the Suggestion
+    """
+    refuter_id: int
+    evidence: Card
+
+
 ###############################################################################
 # Player Interface
 ###############################################################################
@@ -147,7 +159,7 @@ class PlayerInterface():
 
     def receive_suggestion_result(self,
                                   suggestion: Suggestion,
-                                  blocker: Optional[Tuple[int, Card]]) -> None:
+                                  result: Optional[Counterevidence]) -> None:
         """Receives information about the suggestion that was previously made
         by the current player. Expected to be called immediately after a
         Suggestion was returned by "takeTurn()"
@@ -157,7 +169,7 @@ class PlayerInterface():
 
         Parameters:
         suggestion: A Suspect, a Location, and a Weapon card.
-        blocker: Either one of the cards in the suggestion, along with the
+        result: Either one of the cards in the suggestion, along with the
         index of the player who has that card, or None. If it's a card and
         player index, than no player between self and that player index
         (incrementing, and wrapping around at numPlayers to 0) has any of
@@ -347,8 +359,8 @@ class ClueGame():
                 # Ask them which they'd like to show.
                 card = blocker.respond_to_suggestion(suggestor_id, suggestion)
                 assert card is not None
-                suggestor.receive_suggestion_result(suggestion,
-                                                    [blocker_id, card])
+                result = Counterevidence(blocker_id, card)
+                suggestor.receive_suggestion_result(suggestion, result)
                 break
         if blocker_id is None:
             print("    No other player had any of those cards.")

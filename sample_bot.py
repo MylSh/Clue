@@ -48,7 +48,7 @@ class SampleBot(PlayerInterface):
 
     def receive_suggestion_result(self,
                                   suggestion: Suggestion,
-                                  blocker: Optional[Tuple[int, Card]]) -> None:
+                                  result: Optional[Counterevidence]) -> None:
         pass
 
     def observeSuggestion(self,
