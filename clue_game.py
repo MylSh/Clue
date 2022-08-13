@@ -295,24 +295,24 @@ class ClueGame():
 
         # Deal cards and initialize each player.
         # Also, remember what each player has.
+        print("The players are:")
         num_cards_per_player: int = int(len(deck)/self.num_players)
         self.player_infos: list[PlayerInfo] = []
         for i in range(self.num_players):
             player_id: int = len(self.player_infos)
-            self.player_infos.append(PlayerInfo(players[i], []))
-            player_info: player_info = self.player_infos[player_id]
+            face_down_cards: list[Cards] = []
             for _ in range(num_cards_per_player):
-                player_info.face_down_cards.append(deck.pop())
+                face_down_cards.append(deck.pop())
+            self.player_infos.append(PlayerInfo(players[i], face_down_cards))
+            player_info: PlayerInfo = self.player_infos[player_id]
             player_info.player.initialize(player_id, self.num_players,
                                           self.face_up_cards,
                                           player_info.face_down_cards)
-
-        print("The players are:")
-
-        for i in range(self.num_players):
-            players_cards = player_info.face_down_cards
-            print("   " + str(i) + ": " + self.player_infos[i].player.name() +
-                  "(" + ', '.join([card.name for card in players_cards]) + ")")
+            player_name: str = (str(player_id) + ": " +
+                                player_info.player.name())
+            player_cards: str = (', '.join([card.name for card
+                                            in face_down_cards]))
+            print("   " + player_name + "(" + player_cards + ")")
         print()
         if len(self.face_up_cards) == 0:
             print("There are no face up cards.\n")
