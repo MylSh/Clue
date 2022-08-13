@@ -1,7 +1,7 @@
 """Module sample_bot provides the "Samplebot" class, which implements
 the clue AI interface
 """
-from random import choice, random, seed
+from random import choice, random
 from clue_game import *
 
 
@@ -9,7 +9,7 @@ class SampleBot(PlayerInterface):
     """A sample implementation of the player interface"""
 
     def __init__(self) -> None:
-        seed(1)
+        pass
 
     def initialize(self,
                    player_ID: int,
@@ -29,7 +29,7 @@ class SampleBot(PlayerInterface):
         where = choice([location for location in Location])
         what = choice([weapon for weapon in Weapon])
         # 1 in 20 chance of accusing.  Otherwise just makes a suggestion.
-        if(random.random() < 0.05):
+        if random.randint(1, 20) == 20:
             return Accusation(who, where, what)
         else:
             return Suggestion(who, where, what)
