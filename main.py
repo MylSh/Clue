@@ -1,8 +1,13 @@
-from Game import Game
-from SampleBot import SampleBot
+from clue_game import ClueGame
+from sample_bot import SampleBot
+
 
 def main():
-    game:Game = Game([SampleBot(),SampleBot(),SampleBot(),SampleBot()])
+    game: ClueGame = ClueGame([SampleBot(),
+                               SampleBot(),
+                               SampleBot(),
+                               SampleBot()])
     game.execute()
+
 
 main()
