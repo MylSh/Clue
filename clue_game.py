@@ -2,8 +2,9 @@
 Users will have to create their own Player objects that fulfill
 the PlayerInterface
 """
+from abc import ABC, abstractmethod
 from enum import IntEnum
-from typing import NamedTuple, Optional, Tuple, Union
+from typing import NamedTuple, Optional, Union
 import random
 
 
@@ -95,16 +96,19 @@ class Counterevidence(NamedTuple):
 ###############################################################################
 
 
-class PlayerInterface():
+class PlayerInterface(ABC):
     """An interface to create player objects.  Not meant to be instantiated
     directly.
     """
 
+    @abstractmethod
     def __init__(self) -> None:
         """Constructor is essentially a no-op.
         Initialization is delayed to the self.initialize() method.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def initialize(self,
                    player_id: int,
                    num_players: int,
@@ -122,21 +126,27 @@ class PlayerInterface():
         face_up_cards: The cards that are face up and known to all players.
         face_down_cards: The cards that are only known to self.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def name(self) -> str:
         """Returns the name of the current player.
 
         Returns:
         Name of current player.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def take_turn(self) -> Union[Suggestion, Accusation]:
         """Returns either a Suggestion, or an Accusation.
 
         Returns:
         Either a Suggestion, or an Accusation.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def respond_to_suggestion(self,
                               suggestor_id: int,
                               suggestion: Suggestion) -> Optional[Card]:
@@ -156,7 +166,9 @@ class PlayerInterface():
         and the facedown cards of self. If not such intersection exists,
         returns `None`.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def receive_suggestion_result(self,
                                   suggestion: Suggestion,
                                   result: Optional[Counterevidence]) -> None:
@@ -176,7 +188,9 @@ class PlayerInterface():
         the cards in suggestion. If it's None, then no other player has any
         of the cards in suggestion.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def observe_suggestion(self,
                            suggestor_id: int,
                            suggestion: Suggestion,
@@ -197,7 +211,9 @@ class PlayerInterface():
         If no non-suggesting player could block it, then a value of
         `None` will be used.
         """
+        raise NotImplemented
 
+    @abstractmethod
     def observe_accusation(self,
                            accusor_id: int,
                            accusation: Accusation) -> None:
@@ -214,6 +230,7 @@ class PlayerInterface():
         accusation.
         accusation:  A Suspect, a Location, and a Weapon card.
         """
+        raise NotImplemented
 
 ###############################################################################
 # Game object
@@ -300,7 +317,7 @@ class ClueGame():
         self.player_infos: list[PlayerInfo] = []
         for i in range(self.num_players):
             player_id: int = len(self.player_infos)
-            face_down_cards: list[Cards] = []
+            face_down_cards: list[Card] = []
             for _ in range(num_cards_per_player):
                 face_down_cards.append(deck.pop())
             self.player_infos.append(PlayerInfo(players[i], face_down_cards))
