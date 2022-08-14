@@ -56,15 +56,15 @@ The game ends immediately when a player makes a correct accusation, or when all 
 
 Implementing a Clue A.I. is literally a textbook example of a well studied problem called the "Boolean Satisfiability Problem," or SAT.  I recommend reading something like this pdf: http://modelai.gettysburg.edu/2011/clue/clue.pdf (which heavily inspired this project).  It gives a good path from knowing essentially nothing, to having a strong background in making a Clue A.I.
 
-**Source Control**
-This repository is hosted on github.  Using some form of source control is strongly recommended:
-eg. forking this repository so that there's a modifiable copy on your github account, cloning that modifiably branch locally to whatever machine(s) you are working on (and have git installed), and pushing changes whenever you make edits is a decent approach.  Downloading the current repository as a zip file is also an option, but then you might lose progress if the computer dies, and you won't have access to previous versions if you ever want to revert undesired changes.
-
 **Getting your python code off the ground**
 
 This project has a sample A.I. class named `SampleBot` found in sample_bot.py.  If you run main.py, you should see a game of clue played with `SampleBot` instances.  I would recommend copy/pasting sample_bot.py, renaming it, renaming the `SampleBot` class in the copied/renamed file and then giving it a better implementation.  To test out your new A.I., update main.py to import and create instances of your new class.
 
 **Making your life easier**
+
+**Source Control**
+This repository is hosted on github.  Using some form of source control is strongly recommended:
+eg. forking this repository so that there's a modifiable copy on your github account, cloning that modifiably branch locally to whatever machine(s) you are working on (and have git installed), and pushing changes whenever you make edits is a decent approach.  Downloading the current repository as a zip file is also an option, but then you might lose progress if the computer dies, and you won't have access to previous versions if you ever want to revert undesired changes.
 
 **Documentation** has been provided through python docstrings.  You can open up clue_game.py and read the doc in the `PlayerInterface` class to get all of the method and parameter descriptions and pre/post conditions, but it should also nicely integrate with IDEs when implementing the subclasses.
 
