@@ -1,6 +1,6 @@
 import unittest
 from sample_bot import SampleBot
-from clue_game import Suspect, Weapon, Location, Card, Suggestion
+from clue_game import Accusation, Location, Suggestion, Suspect, Weapon
 
 
 class TestNameMethod(unittest.TestCase):
@@ -39,6 +39,21 @@ class TestRespondToSuggestionMethod(unittest.TestCase):
                                                 Location.BALLROOM,
                                                 Weapon.CANDLESTICK)),
             None)
+
+
+@unittest.skip("SampleBot is not smart enough... yet.")
+class TestObserveSuggestionResult(unittest.TestCase):
+    def test_observe_suggestion_result(self):
+        sample_bot = SampleBot()
+        sample_bot.initialize(0, 6, [], [])
+        sample_bot.receive_suggestion_result(Suggestion(Suspect.MISS_SCARLETT,
+                                                        Location.BALLROOM,
+                                                        Weapon.CANDLESTICK),
+                                             None)
+        expected_turn = Accusation(Suspect.MISS_SCARLETT,
+                                   Location.BALLROOM,
+                                   Weapon.CANDLESTICK)
+        self.assertEqual(sample_bot.take_turn(), expected_turn)
 
 
 if __name__ == '__main__':
