@@ -237,30 +237,32 @@ class PlayerInterface(ABC):
 ###############################################################################
 
 
-class PlayerInfo():
-    """A struct with relevant player info. Used to verify that players aren't
-    cheating, and whether or not they can still take turns.
-
-    Members:
-    player: A player object.
-    face_down_cards: A copy of the facedown cards that the player has.
-    can_take_turns: Whether the current player can continue to take turns,
-    or whether they have made an incorrect accusation and can only sit and
-    respond to suggestions.
-    """
-
-    def __init__(self, player: PlayerInterface, face_down_cards: list[Card]):
-        self.player = player
-        self.face_down_cards = face_down_cards
-        self.can_take_turns: bool = True
-
-
 class ClueGame():
     """An object to manage a game of Clue.  It will shuffle and distribute
     cards, ensure everyone gets their cards, confirm no one is cheating,
     and make sure information is shared when appropriate.  It will also
     document the game by logging relevant information to the output.
     """
+    
+    class __PlayerInfo():
+        """A helper struct with relevant player info for the ClueGame class.
+        Used to verify that players aren't cheating, and whether or not they
+        can still take turns.
+
+        Members:
+        player: A player object.
+        face_down_cards: A copy of the facedown cards that the player has.
+        can_take_turns: Whether the current player can continue to take turns,
+        or whether they have made an incorrect accusation and can only sit and
+        respond to suggestions.
+        """
+
+        def __init__(self,
+                     player: PlayerInterface,
+                     face_down_cards: list[Card]):
+            self.player = player
+            self.face_down_cards = face_down_cards
+            self.can_take_turns: bool = True
 
     def __init__(self,
                  players: list[PlayerInterface]):
@@ -303,7 +305,7 @@ class ClueGame():
         random.shuffle(deck)
 
         self.face_up_cards: list[Card] = []
-        num_faceup_cards: int = len(deck) % self.num_players
+        num_faceup_cards = int(len(deck) % self.num_players)
 
         for i in range(num_faceup_cards):
             self.face_up_cards.append(deck.pop())
@@ -313,15 +315,16 @@ class ClueGame():
         # Deal cards and initialize each player.
         # Also, remember what each player has.
         print("The players are:")
-        num_cards_per_player: int = int(len(deck)/self.num_players)
-        self.player_infos: list[PlayerInfo] = []
+        num_cards_per_player = int(len(deck)/self.num_players)
+        self.player_infos: list[self.__PlayerInfo] = []
         for i in range(self.num_players):
             player_id: int = len(self.player_infos)
             face_down_cards: list[Card] = []
             for _ in range(num_cards_per_player):
                 face_down_cards.append(deck.pop())
-            self.player_infos.append(PlayerInfo(players[i], face_down_cards))
-            player_info: PlayerInfo = self.player_infos[player_id]
+            self.player_infos.append(self.__PlayerInfo(players[i],
+                                                       face_down_cards))
+            player_info = self.player_infos[player_id]
             player_info.player.initialize(player_id, self.num_players,
                                           self.face_up_cards,
                                           player_info.face_down_cards)
