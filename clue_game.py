@@ -23,27 +23,27 @@ class Suspect(IntEnum):
     PROFESSOR_PLUM = 6
 
 
-class Weapon(IntEnum):
-    """Weapons"""
-    REVOLVER = 7
-    DAGGER = 8
-    LEAD_PIPE = 9
-    ROPE = 10
-    CANDLESTICK = 11
-    WRENCH = 12
-
-
 class Location(IntEnum):
     """Location"""
-    KITCHEN = 13
-    CONSERVATORY = 14
-    DINING_ROOM = 15
-    BALLROOM = 16
-    STUDY = 17
-    HALL = 18
-    LOUNGE = 19
-    LIBRARY = 20
-    BILLIARD_ROOM = 21
+    KITCHEN = 7
+    CONSERVATORY = 8
+    DINING_ROOM = 9
+    BALLROOM = 10
+    STUDY = 11
+    HALL = 12
+    LOUNGE = 13
+    LIBRARY = 14
+    BILLIARD_ROOM = 15
+
+
+class Weapon(IntEnum):
+    """Weapons"""
+    REVOLVER = 16
+    DAGGER = 17
+    LEAD_PIPE = 18
+    ROPE = 19
+    CANDLESTICK = 20
+    WRENCH = 21
 
 
 Card = Union[Suspect, Weapon, Location]
@@ -243,7 +243,7 @@ class ClueGame():
     and make sure information is shared when appropriate.  It will also
     document the game by logging relevant information to the output.
     """
-    
+
     class __PlayerInfo():
         """A helper struct with relevant player info for the ClueGame class.
         Used to verify that players aren't cheating, and whether or not they
