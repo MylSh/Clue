@@ -1,5 +1,5 @@
 # Clue
-This is python framework to build and test Clue A.I.s by extending the `PlayerInterface` class in clue_game.py.  
+This is a python 3.10 framework to build and test Clue A.I.s by extending the `PlayerInterface` class in clue_game.py.
 
 A crime has been committed in the Clue Mansion.  Someone has been killed somewhere with something.  A.I.s race to determine the suspect, location, and weapon.
 
