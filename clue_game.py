@@ -15,35 +15,35 @@ import random
 
 class Suspect(IntEnum):
     """Suspects"""
-    MISS_SCARLETT = 1
-    COLONEL_MUSTARD = 2
-    MRS_WHITE = 3
-    REVEREND_GREEN = 4
-    MRS_PEACOCK = 5
-    PROFESSOR_PLUM = 6
+    COLONEL_MUSTARD = 1
+    MISS_SCARLETT = 2
+    MRS_PEACOCK = 3
+    MRS_WHITE = 4
+    PROFESSOR_PLUM = 5
+    REVEREND_GREEN = 6
 
 
 class Location(IntEnum):
     """Location"""
-    KITCHEN = 7
-    CONSERVATORY = 8
-    DINING_ROOM = 9
-    BALLROOM = 10
-    STUDY = 11
-    HALL = 12
-    LOUNGE = 13
-    LIBRARY = 14
-    BILLIARD_ROOM = 15
+    BALLROOM = 7
+    BILLIARD_ROOM = 8
+    CONSERVATORY = 9
+    DINING_ROOM = 10
+    HALL = 11
+    KITCHEN = 12
+    LIBRARY = 13
+    LOUNGE = 14
+    STUDY = 15
 
 
 class Weapon(IntEnum):
     """Weapons"""
-    REVOLVER = 16
+    CANDLESTICK = 16
     DAGGER = 17
     LEAD_PIPE = 18
-    ROPE = 19
-    CANDLESTICK = 20
-    WRENCH = 21
+    REVOLVER = 19
+    ROPE = 20
+    SPANNER = 21
 
 
 Card = Union[Suspect, Weapon, Location]
@@ -373,14 +373,15 @@ class ClueGame():
                     or suggestion.what in maybe_blockers_cards):
                 blocker_id = maybe_blocker_id
                 blocker = maybe_blocker
-                print("    " + str(blocker_id) + ": " + blocker.name() +
-                      " has at least one of those cards")
                 # Blocker has at least one card.
                 # Ask them which they'd like to show.
                 card = blocker.respond_to_suggestion(suggestor_id, suggestion)
                 assert card is not None
                 result = Counterevidence(blocker_id, card)
                 suggestor.receive_suggestion_result(suggestion, result)
+                print("    " + str(blocker_id) + ": " + blocker.name() +
+                      " disproved this by secretly showing " + card.name +
+                      ".")
                 break
         if blocker_id is None:
             print("    No other player had any of those cards.")
