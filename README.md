@@ -32,6 +32,7 @@ The face up cards are:
     2: sample_bot disproved this by secretly showing DAGGER.
 0: sample_bot is making a suggestion: "MRS_WHITE in the BALLROOM with the SPANNER."
     No other player had any of those cards.
+[...]
 ```
 
 ## Game Rules
