@@ -5,6 +5,34 @@ A crime has been committed in the Clue Mansion.  Someone has been killed somewhe
 
 The `ClueGame` class (found in clue_game.py) takes a list of A.I. objects, and then runs a game of clue with them.  It will print all relevant information, so that humans can watch.  A sample A.I., `SampleBot`, has been provided in sample_bot.py.
 
+## Sample Output
+When run, the ClueGame class will log the progress of the game.  Eg.
+```
+Starting a game of Clue with 4 players.
+
+The final solution is: REVEREND_GREEN in the BILLIARD_ROOM with the ROPE
+
+The players are:
+   0: sample_bot(MISS_SCARLETT, MRS_WHITE, BALLROOM, HALL)
+   1: sample_bot(COLONEL_MUSTARD, LIBRARY, CANDLESTICK, KITCHEN)
+   2: sample_bot(DAGGER, MRS_PEACOCK, DINING_ROOM, CONSERVATORY)
+   3: sample_bot(LEAD_PIPE, LOUNGE, STUDY, REVOLVER)
+
+The face up cards are:
+   PROFESSOR_PLUM
+   SPANNER
+
+0: sample_bot is making a suggestion: "MISS_SCARLETT in the KITCHEN with the LEAD_PIPE."
+    1: sample_bot disproved this by secretly showing KITCHEN.
+1: sample_bot is making a suggestion: "MRS_WHITE in the DINING_ROOM with the LEAD_PIPE."
+    2: sample_bot disproved this by secretly showing DINING_ROOM.
+2: sample_bot is making a suggestion: "COLONEL_MUSTARD in the BILLIARD_ROOM with the LEAD_PIPE."
+    3: sample_bot disproved this by secretly showing LEAD_PIPE.
+3: sample_bot is making a suggestion: "REVEREND_GREEN in the STUDY with the DAGGER."
+    2: sample_bot disproved this by secretly showing DAGGER.
+0: sample_bot is making a suggestion: "MRS_WHITE in the BALLROOM with the SPANNER."
+    No other player had any of those cards.
+```
 
 ## Game Rules
 
