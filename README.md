@@ -10,29 +10,51 @@ When run, the ClueGame class will log the progress of the game.  Eg.
 ```
 Starting a game of Clue with 4 players.
 
-The final solution is: REVEREND_GREEN in the BILLIARD_ROOM with the ROPE
+The final solution is: COLONEL_MUSTARD in the DINING_ROOM with the CANDLESTICK
 
 The players are:
-   0: sample_bot(MISS_SCARLETT, MRS_WHITE, BALLROOM, HALL)
-   1: sample_bot(COLONEL_MUSTARD, LIBRARY, CANDLESTICK, KITCHEN)
-   2: sample_bot(DAGGER, MRS_PEACOCK, DINING_ROOM, CONSERVATORY)
-   3: sample_bot(LEAD_PIPE, LOUNGE, STUDY, REVOLVER)
+   0: sample_bot(SPANNER, LIBRARY, MISS_SCARLETT, BALLROOM)
+   1: sample_bot(LOUNGE, HALL, KITCHEN, LEAD_PIPE)
+   2: sample_bot(MRS_WHITE, ROPE, REVEREND_GREEN, MRS_PEACOCK)
+   3: full_bot(REVOLVER, STUDY, DAGGER, CONSERVATORY)
 
 The face up cards are:
+   BILLIARD_ROOM
    PROFESSOR_PLUM
-   SPANNER
 
-0: sample_bot is making a suggestion: "MISS_SCARLETT in the KITCHEN with the LEAD_PIPE."
-    1: sample_bot disproved this by secretly showing KITCHEN.
-1: sample_bot is making a suggestion: "MRS_WHITE in the DINING_ROOM with the LEAD_PIPE."
-    2: sample_bot disproved this by secretly showing DINING_ROOM.
-2: sample_bot is making a suggestion: "COLONEL_MUSTARD in the BILLIARD_ROOM with the LEAD_PIPE."
-    3: sample_bot disproved this by secretly showing LEAD_PIPE.
-3: sample_bot is making a suggestion: "REVEREND_GREEN in the STUDY with the DAGGER."
-    2: sample_bot disproved this by secretly showing DAGGER.
-0: sample_bot is making a suggestion: "MRS_WHITE in the BALLROOM with the SPANNER."
+==============================================================================================
+Round #0
+==============================================================================================
+0: sample_bot is making a suggestion: "MRS_PEACOCK in the BALLROOM with the LEAD_PIPE."
+    1: sample_bot disproved this by secretly showing LEAD_PIPE.
+1: sample_bot is making a suggestion: "MRS_PEACOCK in the KITCHEN with the ROPE."
+    2: sample_bot disproved this by secretly showing MRS_PEACOCK.
+2: sample_bot is making a suggestion: "MRS_WHITE in the HALL with the LEAD_PIPE."
+    1: sample_bot disproved this by secretly showing HALL.
+3: full_bot is making a suggestion: "COLONEL_MUSTARD in the BALLROOM with the CANDLESTICK."
+    0: sample_bot disproved this by secretly showing BALLROOM.
+==============================================================================================
+Round #1
+==============================================================================================
+0: sample_bot is making a suggestion: "PROFESSOR_PLUM in the LOUNGE with the CANDLESTICK."
+    1: sample_bot disproved this by secretly showing LOUNGE.
+1: sample_bot is making a suggestion: "MRS_WHITE in the BALLROOM with the DAGGER."
+    2: sample_bot disproved this by secretly showing MRS_WHITE.
+2: sample_bot is making a suggestion: "MRS_WHITE in the DINING_ROOM with the SPANNER."
+    0: sample_bot disproved this by secretly showing SPANNER.
+3: full_bot is making a suggestion: "COLONEL_MUSTARD in the DINING_ROOM with the CANDLESTICK."
     No other player had any of those cards.
-[...]
+==============================================================================================
+Round #2
+==============================================================================================
+0: sample_bot is making a suggestion: "MISS_SCARLETT in the CONSERVATORY with the ROPE."
+    2: sample_bot disproved this by secretly showing ROPE.
+1: sample_bot is making a suggestion: "MISS_SCARLETT in the HALL with the REVOLVER."
+    3: full_bot disproved this by secretly showing REVOLVER.
+2: sample_bot is making a suggestion: "REVEREND_GREEN in the LOUNGE with the ROPE."
+    1: sample_bot disproved this by secretly showing LOUNGE.
+3: full_bot is making an accusation: "COLONEL_MUSTARD in the DINING_ROOM with the CANDLESTICK."
+    3: full_bot has won!
 ```
 
 ## Game Rules
