@@ -462,7 +462,12 @@ class ClueGame():
         information.
         """
         number_of_possible_solutions: int = 324
-        for _ in range(number_of_possible_solutions):
+        for i in range(number_of_possible_solutions):
+            print("===============================================" +
+                  "===============================================")
+            print("Round #" + str(i))
+            print("===============================================" +
+                  "===============================================")
             for player_id in range(self.num_players):
                 if self.player_infos[player_id].can_take_turns:
                     gameIsOver = self.__giveTurn(player_id)
