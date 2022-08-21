@@ -388,7 +388,7 @@ class ClueGame():
             suggestor.receive_suggestion_result(suggestion, None)
 
         for player_info in self.player_infos:
-            player_info.player.observe_suggestion(suggestor,
+            player_info.player.observe_suggestion(suggestor_id,
                                                   suggestion,
                                                   blocker_id)
 
@@ -447,6 +447,7 @@ class ClueGame():
         assert self.player_infos[player_id].can_take_turns
 
         player = self.player_infos[player_id].player
+
         scenario = player.take_turn()
         if isinstance(scenario, Suggestion):
             self.__handleSuggestion(player_id, scenario)
