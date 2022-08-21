@@ -3,10 +3,10 @@ from sample_bot import SampleBot
 
 
 def main():
-    game: ClueGame = ClueGame([SampleBot(),
-                               SampleBot(),
-                               SampleBot(),
-                               SampleBot()])
+    game = ClueGame([SampleBot(),
+                     SampleBot(),
+                     SampleBot(),
+                     SampleBot()])
     game.execute()
 
 
