@@ -5,6 +5,35 @@ A crime has been committed in the Clue Mansion.  Someone has been killed somewhe
 
 The `ClueGame` class (found in clue_game.py) takes a list of A.I. objects, and then runs a game of clue with them.  It will print all relevant information, so that humans can watch.  A sample A.I., `SampleBot`, has been provided in sample_bot.py.
 
+## Sample Output
+When run, the ClueGame class will log the progress of the game.  Eg.
+```
+Starting a game of Clue with 4 players.
+
+The final solution is: REVEREND_GREEN in the BILLIARD_ROOM with the ROPE
+
+The players are:
+   0: sample_bot(MISS_SCARLETT, MRS_WHITE, BALLROOM, HALL)
+   1: sample_bot(COLONEL_MUSTARD, LIBRARY, CANDLESTICK, KITCHEN)
+   2: sample_bot(DAGGER, MRS_PEACOCK, DINING_ROOM, CONSERVATORY)
+   3: sample_bot(LEAD_PIPE, LOUNGE, STUDY, REVOLVER)
+
+The face up cards are:
+   PROFESSOR_PLUM
+   SPANNER
+
+0: sample_bot is making a suggestion: "MISS_SCARLETT in the KITCHEN with the LEAD_PIPE."
+    1: sample_bot disproved this by secretly showing KITCHEN.
+1: sample_bot is making a suggestion: "MRS_WHITE in the DINING_ROOM with the LEAD_PIPE."
+    2: sample_bot disproved this by secretly showing DINING_ROOM.
+2: sample_bot is making a suggestion: "COLONEL_MUSTARD in the BILLIARD_ROOM with the LEAD_PIPE."
+    3: sample_bot disproved this by secretly showing LEAD_PIPE.
+3: sample_bot is making a suggestion: "REVEREND_GREEN in the STUDY with the DAGGER."
+    2: sample_bot disproved this by secretly showing DAGGER.
+0: sample_bot is making a suggestion: "MRS_WHITE in the BALLROOM with the SPANNER."
+    No other player had any of those cards.
+[...]
+```
 
 ## Game Rules
 
@@ -36,13 +65,16 @@ The game has exactly 21 unique cards divided into 3 categories:
      - Rope
      - Spanner
 
+*Note: Each category of card is represented as an enum in clue_game.py: `Suspect`, `Location` and `Weapon`. `Card` is a union of the three enums.  The category of a card can be checked by using `in` eg. `if card in Suspect... elif card in Location ... else assert card in Weapon ...`
+`Card.name` returns the human readible title of the card.  `Card.value` returns a strictly positive integer that is unique for each card.*
+
 At the start of the game a single card from each of the categories will be randomly selected.  This set of 3 cards (1 suspect, 1 location, and 1 weapon) is the final solution that the players must deduce, and is placed in an envelope.  The remaining cards are shuffled together to form a single deck of 18 cards.  Each of those 18 cards is guaranteed to NOT be part of the final solution.  Those cards are dealt to the players facedown and are hidden information.  If the number of cards does not evenly divide amongst the players, then the remaining modulo is placed faceup, and is known to all players.
 
 A player sequence is determined (eg. clockwise), and players then take turns sequentially.  On a turn, a player may make a suggestion, or an accusation.
 
-**Suggestions** are used to gather information (and maybe to bluff).  A scenario is proposed (suspect, location, and weapon) by the active player.  The details of the suggestion (who, where, what) and who made the suggestion are public knowledge.  The next player will then check their facedown cards.  If one or more of their facedown cards match a card in the suggestion, they must secretly show the active player a single card, and may choose which one to reveal.  If the first checker doesn't have any cards that match, the following player will check.  Until a card is found that matches, each player (in order) will check.  If the active player becomes the checker, then the turn ends.  It is public knowledge whether or not a suggestion has been disproven (by someone providing a card that is counterevidence to the theory), and by whom.  The card used to disprove a theory is not public knowledge, and is only known by the suggestor, and the player who provided the counterevidence.
+**Suggestions** are used to gather information (and maybe to bluff).  A scenario is publicly proposed (suspect, location, and weapon) by the active player.  The next player will then check their facedown cards.  If one or more of their facedown cards match a card in the suggestion, they must secretly show the active player one of the matching cards.  If they have more than one matching cards, they may choose which one to reveal.  If the first checker doesn't have any cards that match, the following player will check.  Until a card is found that matches, each player (in order) will check.  The active player never publicly checks their own suggestion. If every other player has checked without finding a matching card, then the turn ends.  It is public knowledge who makes each suggestion, the contents of the suggestion, whether or not the suggestion has been disproven (by someone providing a card that is counterevidence to the theory), and by whom.  The card used to disprove a theory is not public knowledge, and is only known by the suggestor, and the player who provided the counterevidence.
 
-*Note: `ClueGame` will monitor the players to ensure that no-one is cheating and claiming they don't have a card when they really do.*
+*Note: `ClueGame` will monitor the A.I.s to ensure that none of them cheats and claims they don't have a card when they really do.*
 
 **Accusations** are how the game is won.  The active player proposes a scenario (suspect, location, and weapon), and then checks against the final solution in the envelope.  If the accusation is correct, the active player has won and the game is over.  If the accusation is wrong, the active player may no longer take turns.  They must still stick around to help disprove suggestions.
 
