@@ -108,7 +108,7 @@ The game ends immediately when a player makes a correct accusation, or when all 
 
 **Approaching the problem**
 
-Implementing a Clue A.I. is literally a textbook example of a well studied problem called the "Boolean Satisfiability Problem," or SAT.  I recommend reading something like this pdf: http://modelai.gettysburg.edu/2011/clue/clue.pdf (which heavily inspired this project).  It gives a good path from knowing essentially nothing, to having a strong background in making a Clue A.I.
+There is no right answer here, but I'll give one possible path.  Keeping track of where each card definitely isn't, and then looking at where it must therefore be will get you pretty far.  If you then want to take the next step and keep track of what each card might be based on who blocked which suggestion, the "Boolean Satisfiability Problem" also called "SAT" might be helpful to learn about.  This pdf gives a good path from knowing essentially nothing, to understanding the SAT problem in the context of Clue A.I.s: http://modelai.gettysburg.edu/2011/clue/clue.pdf (and heavily inspired this project).  
 
 **Getting your python code off the ground**
 
